@@ -1,0 +1,35 @@
+syntax="proto3";
+
+option go_package = "./proto";
+
+package greet_service;
+
+service GreetService{
+  rpc sayHello(NoParam) returns (HelloResponse);
+
+  rpc sayHelloServerStreaming(NameLists) returns (stream HelloResponse);
+
+  rpc sayHelloClientStreaming(stream HelloResponse)  returns (MessageLists);
+
+  rpc sayHelloBidirectionalStreaming(stream HelloRequests) returns (stream HelloResponse);
+
+}
+
+
+message NoParam{}
+
+message HelloResponse{
+  string message = 1;
+}
+
+message HelloRequests{
+  string message = 1;
+}
+
+message MessageLists {
+  repeated string messages = 1;
+}
+
+message NameLists{
+  repeated string names = 1;
+}
